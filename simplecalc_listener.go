@@ -16,6 +16,12 @@ type SimpleCalcListener interface {
 	// EnterLetStatement is called when entering the letStatement production.
 	EnterLetStatement(c *LetStatementContext)
 
+	// EnterCallFunc is called when entering the callFunc production.
+	EnterCallFunc(c *CallFuncContext)
+
+	// EnterExpression is called when entering the expression production.
+	EnterExpression(c *ExpressionContext)
+
 	// ExitProg is called when exiting the prog production.
 	ExitProg(c *ProgContext)
 
@@ -24,4 +30,10 @@ type SimpleCalcListener interface {
 
 	// ExitLetStatement is called when exiting the letStatement production.
 	ExitLetStatement(c *LetStatementContext)
+
+	// ExitCallFunc is called when exiting the callFunc production.
+	ExitCallFunc(c *CallFuncContext)
+
+	// ExitExpression is called when exiting the expression production.
+	ExitExpression(c *ExpressionContext)
 }

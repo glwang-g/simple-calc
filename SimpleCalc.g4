@@ -3,7 +3,20 @@ grammar SimpleCalc;
 prog: ( funcStatement | letStatement )* EOF;
 
 funcStatement: FUNCTION IDENT LPAREN (IDENT (COMMA IDENT)*)? RPAREN LBRACE letStatement* RBRACE;
-letStatement: LET IDENT ASSIGN INT SEMICOLON;
+letStatement: LET IDENT ASSIGN (callFunc | expression) SEMICOLON;
+
+callFunc: IDENT LPAREN (IDENT (COMMA IDENT)*)? RPAREN;
+
+expression:
+    | expression PLUS expression
+    | expression MINUS expression
+    | expression MULTIPLY expression
+    | expression DIVIDE expression
+    | INT
+    | FLOAT
+    | IDENT
+    | LPAREN expression RPAREN;
+
 
 // 词法规则
 LET: 'let';
@@ -16,8 +29,12 @@ FALSE: 'false';
 
 IDENT: [a-zA-Z_][a-zA-Z0-9_]*;
 INT: [0-9]+;
+FLOAT: [0-9]+'.'[0-9]+;
 NOT_EQ: '!=';
 EQ: '==';
+AND: '&&';
+OR: '||';
+
 
 ASSIGN: '=';
 PLUS: '+';
@@ -27,6 +44,8 @@ MULTIPLY: '*';
 DIVIDE: '/';
 GT: '>';
 LT: '<';
+GTE: '>=';
+LTE: '<=';
 
 COMMA: ',';
 LPAREN: '(';
@@ -36,7 +55,7 @@ RBRACE: '}';
 SEMICOLON: ';';
 
 // 忽略空白字符
-WS: [ \t\r\n]+ -> skip;
+WHITESPACE: [ \t\r\n]+ -> skip;
 
-// 处理非法字符/25
+// 处理非法字符
 ILLEGAL: .;
