@@ -2,10 +2,13 @@ grammar SimpleCalc;
 //语法规则
 prog: ( funcStatement | letStatement )* EOF;
 
-funcStatement: FUNCTION IDENT LPAREN (IDENT (COMMA IDENT)*)? RPAREN LBRACE letStatement* RBRACE;
-letStatement: LET IDENT ASSIGN (callFunc | expression) SEMICOLON;
+funcStatement: FUNCTION IDENT LPAREN (IDENT (COMMA IDENT)*)? RPAREN LBRACE letStatement* returnStatement RBRACE;
+
+letStatement: LET IDENT ASSIGN (anonFunction | callFunc | expression) SEMICOLON;
 
 callFunc: IDENT LPAREN (IDENT (COMMA IDENT)*)? RPAREN;
+
+anonFunction: FUNCTION LPAREN (IDENT (COMMA IDENT)*)? RPAREN LBRACE letStatement* returnStatement RBRACE;
 
 expression:
     | expression PLUS expression
@@ -17,6 +20,7 @@ expression:
     | IDENT
     | LPAREN expression RPAREN;
 
+returnStatement: RETURN (expression | anonFunction) SEMICOLON;
 
 // 词法规则
 LET: 'let';

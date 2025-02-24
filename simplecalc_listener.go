@@ -19,8 +19,14 @@ type SimpleCalcListener interface {
 	// EnterCallFunc is called when entering the callFunc production.
 	EnterCallFunc(c *CallFuncContext)
 
+	// EnterAnonFunction is called when entering the anonFunction production.
+	EnterAnonFunction(c *AnonFunctionContext)
+
 	// EnterExpression is called when entering the expression production.
 	EnterExpression(c *ExpressionContext)
+
+	// EnterReturnStatement is called when entering the returnStatement production.
+	EnterReturnStatement(c *ReturnStatementContext)
 
 	// ExitProg is called when exiting the prog production.
 	ExitProg(c *ProgContext)
@@ -34,6 +40,12 @@ type SimpleCalcListener interface {
 	// ExitCallFunc is called when exiting the callFunc production.
 	ExitCallFunc(c *CallFuncContext)
 
+	// ExitAnonFunction is called when exiting the anonFunction production.
+	ExitAnonFunction(c *AnonFunctionContext)
+
 	// ExitExpression is called when exiting the expression production.
 	ExitExpression(c *ExpressionContext)
+
+	// ExitReturnStatement is called when exiting the returnStatement production.
+	ExitReturnStatement(c *ReturnStatementContext)
 }

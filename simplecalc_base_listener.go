@@ -1,11 +1,7 @@
 // Code generated from SimpleCalc.g4 by ANTLR 4.13.2. DO NOT EDIT.
 
 package main // SimpleCalc
-import (
-	"fmt"
-
-	"github.com/antlr4-go/antlr/v4"
-)
+import "github.com/antlr4-go/antlr/v4"
 
 // BaseSimpleCalcListener is a complete listener for a parse tree produced by SimpleCalcParser.
 type BaseSimpleCalcListener struct{}
@@ -19,14 +15,10 @@ func (s *BaseSimpleCalcListener) VisitTerminal(node antlr.TerminalNode) {}
 func (s *BaseSimpleCalcListener) VisitErrorNode(node antlr.ErrorNode) {}
 
 // EnterEveryRule is called when any rule is entered.
-func (s *BaseSimpleCalcListener) EnterEveryRule(ctx antlr.ParserRuleContext) {
-	fmt.Printf("Enter %d, %s, %s \n", ctx.GetRuleIndex(), SimpleCalcParserStaticData.RuleNames[ctx.GetRuleIndex()], ctx.GetText())
-}
+func (s *BaseSimpleCalcListener) EnterEveryRule(ctx antlr.ParserRuleContext) {}
 
 // ExitEveryRule is called when any rule is exited.
-func (s *BaseSimpleCalcListener) ExitEveryRule(ctx antlr.ParserRuleContext) {
-	fmt.Printf("Exit %d, %s, %s \n", ctx.GetRuleIndex(), SimpleCalcParserStaticData.RuleNames[ctx.GetRuleIndex()], ctx.GetText())
-}
+func (s *BaseSimpleCalcListener) ExitEveryRule(ctx antlr.ParserRuleContext) {}
 
 // EnterProg is called when production prog is entered.
 func (s *BaseSimpleCalcListener) EnterProg(ctx *ProgContext) {}
@@ -52,8 +44,20 @@ func (s *BaseSimpleCalcListener) EnterCallFunc(ctx *CallFuncContext) {}
 // ExitCallFunc is called when production callFunc is exited.
 func (s *BaseSimpleCalcListener) ExitCallFunc(ctx *CallFuncContext) {}
 
+// EnterAnonFunction is called when production anonFunction is entered.
+func (s *BaseSimpleCalcListener) EnterAnonFunction(ctx *AnonFunctionContext) {}
+
+// ExitAnonFunction is called when production anonFunction is exited.
+func (s *BaseSimpleCalcListener) ExitAnonFunction(ctx *AnonFunctionContext) {}
+
 // EnterExpression is called when production expression is entered.
 func (s *BaseSimpleCalcListener) EnterExpression(ctx *ExpressionContext) {}
 
 // ExitExpression is called when production expression is exited.
 func (s *BaseSimpleCalcListener) ExitExpression(ctx *ExpressionContext) {}
+
+// EnterReturnStatement is called when production returnStatement is entered.
+func (s *BaseSimpleCalcListener) EnterReturnStatement(ctx *ReturnStatementContext) {}
+
+// ExitReturnStatement is called when production returnStatement is exited.
+func (s *BaseSimpleCalcListener) ExitReturnStatement(ctx *ReturnStatementContext) {}

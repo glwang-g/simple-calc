@@ -44,49 +44,66 @@ func simplecalcParserInit() {
 		"RPAREN", "LBRACE", "RBRACE", "SEMICOLON", "WHITESPACE", "ILLEGAL",
 	}
 	staticData.RuleNames = []string{
-		"prog", "funcStatement", "letStatement", "callFunc", "expression",
+		"prog", "funcStatement", "letStatement", "callFunc", "anonFunction",
+		"expression", "returnStatement",
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 32, 93, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
-		4, 1, 0, 1, 0, 5, 0, 13, 8, 0, 10, 0, 12, 0, 16, 9, 0, 1, 0, 1, 0, 1, 1,
-		1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 26, 8, 1, 10, 1, 12, 1, 29, 9, 1, 3,
-		1, 31, 8, 1, 1, 1, 1, 1, 1, 1, 5, 1, 36, 8, 1, 10, 1, 12, 1, 39, 9, 1,
-		1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 3, 2, 48, 8, 2, 1, 2, 1, 2, 1,
-		3, 1, 3, 1, 3, 1, 3, 1, 3, 5, 3, 57, 8, 3, 10, 3, 12, 3, 60, 9, 3, 3, 3,
-		62, 8, 3, 1, 3, 1, 3, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 3,
-		4, 74, 8, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4, 1, 4,
-		1, 4, 1, 4, 5, 4, 88, 8, 4, 10, 4, 12, 4, 91, 9, 4, 1, 4, 0, 1, 8, 5, 0,
-		2, 4, 6, 8, 0, 0, 103, 0, 14, 1, 0, 0, 0, 2, 19, 1, 0, 0, 0, 4, 42, 1,
-		0, 0, 0, 6, 51, 1, 0, 0, 0, 8, 73, 1, 0, 0, 0, 10, 13, 3, 2, 1, 0, 11,
-		13, 3, 4, 2, 0, 12, 10, 1, 0, 0, 0, 12, 11, 1, 0, 0, 0, 13, 16, 1, 0, 0,
-		0, 14, 12, 1, 0, 0, 0, 14, 15, 1, 0, 0, 0, 15, 17, 1, 0, 0, 0, 16, 14,
-		1, 0, 0, 0, 17, 18, 5, 0, 0, 1, 18, 1, 1, 0, 0, 0, 19, 20, 5, 2, 0, 0,
-		20, 21, 5, 8, 0, 0, 21, 30, 5, 26, 0, 0, 22, 27, 5, 8, 0, 0, 23, 24, 5,
-		25, 0, 0, 24, 26, 5, 8, 0, 0, 25, 23, 1, 0, 0, 0, 26, 29, 1, 0, 0, 0, 27,
-		25, 1, 0, 0, 0, 27, 28, 1, 0, 0, 0, 28, 31, 1, 0, 0, 0, 29, 27, 1, 0, 0,
-		0, 30, 22, 1, 0, 0, 0, 30, 31, 1, 0, 0, 0, 31, 32, 1, 0, 0, 0, 32, 33,
-		5, 27, 0, 0, 33, 37, 5, 28, 0, 0, 34, 36, 3, 4, 2, 0, 35, 34, 1, 0, 0,
-		0, 36, 39, 1, 0, 0, 0, 37, 35, 1, 0, 0, 0, 37, 38, 1, 0, 0, 0, 38, 40,
-		1, 0, 0, 0, 39, 37, 1, 0, 0, 0, 40, 41, 5, 29, 0, 0, 41, 3, 1, 0, 0, 0,
-		42, 43, 5, 1, 0, 0, 43, 44, 5, 8, 0, 0, 44, 47, 5, 15, 0, 0, 45, 48, 3,
-		6, 3, 0, 46, 48, 3, 8, 4, 0, 47, 45, 1, 0, 0, 0, 47, 46, 1, 0, 0, 0, 48,
-		49, 1, 0, 0, 0, 49, 50, 5, 30, 0, 0, 50, 5, 1, 0, 0, 0, 51, 52, 5, 8, 0,
-		0, 52, 61, 5, 26, 0, 0, 53, 58, 5, 8, 0, 0, 54, 55, 5, 25, 0, 0, 55, 57,
-		5, 8, 0, 0, 56, 54, 1, 0, 0, 0, 57, 60, 1, 0, 0, 0, 58, 56, 1, 0, 0, 0,
-		58, 59, 1, 0, 0, 0, 59, 62, 1, 0, 0, 0, 60, 58, 1, 0, 0, 0, 61, 53, 1,
-		0, 0, 0, 61, 62, 1, 0, 0, 0, 62, 63, 1, 0, 0, 0, 63, 64, 5, 27, 0, 0, 64,
-		7, 1, 0, 0, 0, 65, 74, 6, 4, -1, 0, 66, 74, 5, 9, 0, 0, 67, 74, 5, 10,
-		0, 0, 68, 74, 5, 8, 0, 0, 69, 70, 5, 26, 0, 0, 70, 71, 3, 8, 4, 0, 71,
-		72, 5, 27, 0, 0, 72, 74, 1, 0, 0, 0, 73, 65, 1, 0, 0, 0, 73, 66, 1, 0,
-		0, 0, 73, 67, 1, 0, 0, 0, 73, 68, 1, 0, 0, 0, 73, 69, 1, 0, 0, 0, 74, 89,
-		1, 0, 0, 0, 75, 76, 10, 8, 0, 0, 76, 77, 5, 16, 0, 0, 77, 88, 3, 8, 4,
-		9, 78, 79, 10, 7, 0, 0, 79, 80, 5, 17, 0, 0, 80, 88, 3, 8, 4, 8, 81, 82,
-		10, 6, 0, 0, 82, 83, 5, 19, 0, 0, 83, 88, 3, 8, 4, 7, 84, 85, 10, 5, 0,
-		0, 85, 86, 5, 20, 0, 0, 86, 88, 3, 8, 4, 6, 87, 75, 1, 0, 0, 0, 87, 78,
-		1, 0, 0, 0, 87, 81, 1, 0, 0, 0, 87, 84, 1, 0, 0, 0, 88, 91, 1, 0, 0, 0,
-		89, 87, 1, 0, 0, 0, 89, 90, 1, 0, 0, 0, 90, 9, 1, 0, 0, 0, 91, 89, 1, 0,
-		0, 0, 11, 12, 14, 27, 30, 37, 47, 58, 61, 73, 87, 89,
+		4, 1, 32, 129, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
+		4, 2, 5, 7, 5, 2, 6, 7, 6, 1, 0, 1, 0, 5, 0, 17, 8, 0, 10, 0, 12, 0, 20,
+		9, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 1, 30, 8, 1, 10,
+		1, 12, 1, 33, 9, 1, 3, 1, 35, 8, 1, 1, 1, 1, 1, 1, 1, 5, 1, 40, 8, 1, 10,
+		1, 12, 1, 43, 9, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1,
+		2, 3, 2, 54, 8, 2, 1, 2, 1, 2, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 5, 3, 63,
+		8, 3, 10, 3, 12, 3, 66, 9, 3, 3, 3, 68, 8, 3, 1, 3, 1, 3, 1, 4, 1, 4, 1,
+		4, 1, 4, 1, 4, 5, 4, 77, 8, 4, 10, 4, 12, 4, 80, 9, 4, 3, 4, 82, 8, 4,
+		1, 4, 1, 4, 1, 4, 5, 4, 87, 8, 4, 10, 4, 12, 4, 90, 9, 4, 1, 4, 1, 4, 1,
+		4, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 3, 5, 103, 8, 5, 1,
+		5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 1, 5, 5,
+		5, 117, 8, 5, 10, 5, 12, 5, 120, 9, 5, 1, 6, 1, 6, 1, 6, 3, 6, 125, 8,
+		6, 1, 6, 1, 6, 1, 6, 0, 1, 10, 7, 0, 2, 4, 6, 8, 10, 12, 0, 0, 142, 0,
+		18, 1, 0, 0, 0, 2, 23, 1, 0, 0, 0, 4, 47, 1, 0, 0, 0, 6, 57, 1, 0, 0, 0,
+		8, 71, 1, 0, 0, 0, 10, 102, 1, 0, 0, 0, 12, 121, 1, 0, 0, 0, 14, 17, 3,
+		2, 1, 0, 15, 17, 3, 4, 2, 0, 16, 14, 1, 0, 0, 0, 16, 15, 1, 0, 0, 0, 17,
+		20, 1, 0, 0, 0, 18, 16, 1, 0, 0, 0, 18, 19, 1, 0, 0, 0, 19, 21, 1, 0, 0,
+		0, 20, 18, 1, 0, 0, 0, 21, 22, 5, 0, 0, 1, 22, 1, 1, 0, 0, 0, 23, 24, 5,
+		2, 0, 0, 24, 25, 5, 8, 0, 0, 25, 34, 5, 26, 0, 0, 26, 31, 5, 8, 0, 0, 27,
+		28, 5, 25, 0, 0, 28, 30, 5, 8, 0, 0, 29, 27, 1, 0, 0, 0, 30, 33, 1, 0,
+		0, 0, 31, 29, 1, 0, 0, 0, 31, 32, 1, 0, 0, 0, 32, 35, 1, 0, 0, 0, 33, 31,
+		1, 0, 0, 0, 34, 26, 1, 0, 0, 0, 34, 35, 1, 0, 0, 0, 35, 36, 1, 0, 0, 0,
+		36, 37, 5, 27, 0, 0, 37, 41, 5, 28, 0, 0, 38, 40, 3, 4, 2, 0, 39, 38, 1,
+		0, 0, 0, 40, 43, 1, 0, 0, 0, 41, 39, 1, 0, 0, 0, 41, 42, 1, 0, 0, 0, 42,
+		44, 1, 0, 0, 0, 43, 41, 1, 0, 0, 0, 44, 45, 3, 12, 6, 0, 45, 46, 5, 29,
+		0, 0, 46, 3, 1, 0, 0, 0, 47, 48, 5, 1, 0, 0, 48, 49, 5, 8, 0, 0, 49, 53,
+		5, 15, 0, 0, 50, 54, 3, 8, 4, 0, 51, 54, 3, 6, 3, 0, 52, 54, 3, 10, 5,
+		0, 53, 50, 1, 0, 0, 0, 53, 51, 1, 0, 0, 0, 53, 52, 1, 0, 0, 0, 54, 55,
+		1, 0, 0, 0, 55, 56, 5, 30, 0, 0, 56, 5, 1, 0, 0, 0, 57, 58, 5, 8, 0, 0,
+		58, 67, 5, 26, 0, 0, 59, 64, 5, 8, 0, 0, 60, 61, 5, 25, 0, 0, 61, 63, 5,
+		8, 0, 0, 62, 60, 1, 0, 0, 0, 63, 66, 1, 0, 0, 0, 64, 62, 1, 0, 0, 0, 64,
+		65, 1, 0, 0, 0, 65, 68, 1, 0, 0, 0, 66, 64, 1, 0, 0, 0, 67, 59, 1, 0, 0,
+		0, 67, 68, 1, 0, 0, 0, 68, 69, 1, 0, 0, 0, 69, 70, 5, 27, 0, 0, 70, 7,
+		1, 0, 0, 0, 71, 72, 5, 2, 0, 0, 72, 81, 5, 26, 0, 0, 73, 78, 5, 8, 0, 0,
+		74, 75, 5, 25, 0, 0, 75, 77, 5, 8, 0, 0, 76, 74, 1, 0, 0, 0, 77, 80, 1,
+		0, 0, 0, 78, 76, 1, 0, 0, 0, 78, 79, 1, 0, 0, 0, 79, 82, 1, 0, 0, 0, 80,
+		78, 1, 0, 0, 0, 81, 73, 1, 0, 0, 0, 81, 82, 1, 0, 0, 0, 82, 83, 1, 0, 0,
+		0, 83, 84, 5, 27, 0, 0, 84, 88, 5, 28, 0, 0, 85, 87, 3, 4, 2, 0, 86, 85,
+		1, 0, 0, 0, 87, 90, 1, 0, 0, 0, 88, 86, 1, 0, 0, 0, 88, 89, 1, 0, 0, 0,
+		89, 91, 1, 0, 0, 0, 90, 88, 1, 0, 0, 0, 91, 92, 3, 12, 6, 0, 92, 93, 5,
+		29, 0, 0, 93, 9, 1, 0, 0, 0, 94, 103, 6, 5, -1, 0, 95, 103, 5, 9, 0, 0,
+		96, 103, 5, 10, 0, 0, 97, 103, 5, 8, 0, 0, 98, 99, 5, 26, 0, 0, 99, 100,
+		3, 10, 5, 0, 100, 101, 5, 27, 0, 0, 101, 103, 1, 0, 0, 0, 102, 94, 1, 0,
+		0, 0, 102, 95, 1, 0, 0, 0, 102, 96, 1, 0, 0, 0, 102, 97, 1, 0, 0, 0, 102,
+		98, 1, 0, 0, 0, 103, 118, 1, 0, 0, 0, 104, 105, 10, 8, 0, 0, 105, 106,
+		5, 16, 0, 0, 106, 117, 3, 10, 5, 9, 107, 108, 10, 7, 0, 0, 108, 109, 5,
+		17, 0, 0, 109, 117, 3, 10, 5, 8, 110, 111, 10, 6, 0, 0, 111, 112, 5, 19,
+		0, 0, 112, 117, 3, 10, 5, 7, 113, 114, 10, 5, 0, 0, 114, 115, 5, 20, 0,
+		0, 115, 117, 3, 10, 5, 6, 116, 104, 1, 0, 0, 0, 116, 107, 1, 0, 0, 0, 116,
+		110, 1, 0, 0, 0, 116, 113, 1, 0, 0, 0, 117, 120, 1, 0, 0, 0, 118, 116,
+		1, 0, 0, 0, 118, 119, 1, 0, 0, 0, 119, 11, 1, 0, 0, 0, 120, 118, 1, 0,
+		0, 0, 121, 124, 5, 5, 0, 0, 122, 125, 3, 10, 5, 0, 123, 125, 3, 8, 4, 0,
+		124, 122, 1, 0, 0, 0, 124, 123, 1, 0, 0, 0, 125, 126, 1, 0, 0, 0, 126,
+		127, 5, 30, 0, 0, 127, 13, 1, 0, 0, 0, 15, 16, 18, 31, 34, 41, 53, 64,
+		67, 78, 81, 88, 102, 116, 118, 124,
 	}
 	deserializer := antlr.NewATNDeserializer(nil)
 	staticData.atn = deserializer.Deserialize(staticData.serializedATN)
@@ -161,11 +178,13 @@ const (
 
 // SimpleCalcParser rules.
 const (
-	SimpleCalcParserRULE_prog          = 0
-	SimpleCalcParserRULE_funcStatement = 1
-	SimpleCalcParserRULE_letStatement  = 2
-	SimpleCalcParserRULE_callFunc      = 3
-	SimpleCalcParserRULE_expression    = 4
+	SimpleCalcParserRULE_prog            = 0
+	SimpleCalcParserRULE_funcStatement   = 1
+	SimpleCalcParserRULE_letStatement    = 2
+	SimpleCalcParserRULE_callFunc        = 3
+	SimpleCalcParserRULE_anonFunction    = 4
+	SimpleCalcParserRULE_expression      = 5
+	SimpleCalcParserRULE_returnStatement = 6
 )
 
 // IProgContext is an interface to support dynamic dispatch.
@@ -330,7 +349,7 @@ func (p *SimpleCalcParser) Prog() (localctx IProgContext) {
 	var _la int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(14)
+	p.SetState(18)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -338,7 +357,7 @@ func (p *SimpleCalcParser) Prog() (localctx IProgContext) {
 	_la = p.GetTokenStream().LA(1)
 
 	for _la == SimpleCalcParserLET || _la == SimpleCalcParserFUNCTION {
-		p.SetState(12)
+		p.SetState(16)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -347,13 +366,13 @@ func (p *SimpleCalcParser) Prog() (localctx IProgContext) {
 		switch p.GetTokenStream().LA(1) {
 		case SimpleCalcParserFUNCTION:
 			{
-				p.SetState(10)
+				p.SetState(14)
 				p.FuncStatement()
 			}
 
 		case SimpleCalcParserLET:
 			{
-				p.SetState(11)
+				p.SetState(15)
 				p.LetStatement()
 			}
 
@@ -362,7 +381,7 @@ func (p *SimpleCalcParser) Prog() (localctx IProgContext) {
 			goto errorExit
 		}
 
-		p.SetState(16)
+		p.SetState(20)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -370,7 +389,7 @@ func (p *SimpleCalcParser) Prog() (localctx IProgContext) {
 		_la = p.GetTokenStream().LA(1)
 	}
 	{
-		p.SetState(17)
+		p.SetState(21)
 		p.Match(SimpleCalcParserEOF)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -405,6 +424,7 @@ type IFuncStatementContext interface {
 	LPAREN() antlr.TerminalNode
 	RPAREN() antlr.TerminalNode
 	LBRACE() antlr.TerminalNode
+	ReturnStatement() IReturnStatementContext
 	RBRACE() antlr.TerminalNode
 	AllLetStatement() []ILetStatementContext
 	LetStatement(i int) ILetStatementContext
@@ -469,6 +489,22 @@ func (s *FuncStatementContext) RPAREN() antlr.TerminalNode {
 
 func (s *FuncStatementContext) LBRACE() antlr.TerminalNode {
 	return s.GetToken(SimpleCalcParserLBRACE, 0)
+}
+
+func (s *FuncStatementContext) ReturnStatement() IReturnStatementContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IReturnStatementContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IReturnStatementContext)
 }
 
 func (s *FuncStatementContext) RBRACE() antlr.TerminalNode {
@@ -551,7 +587,7 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(19)
+		p.SetState(23)
 		p.Match(SimpleCalcParserFUNCTION)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -559,7 +595,7 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 		}
 	}
 	{
-		p.SetState(20)
+		p.SetState(24)
 		p.Match(SimpleCalcParserIDENT)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -567,14 +603,14 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 		}
 	}
 	{
-		p.SetState(21)
+		p.SetState(25)
 		p.Match(SimpleCalcParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
 		}
 	}
-	p.SetState(30)
+	p.SetState(34)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -583,14 +619,14 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 
 	if _la == SimpleCalcParserIDENT {
 		{
-			p.SetState(22)
+			p.SetState(26)
 			p.Match(SimpleCalcParserIDENT)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
 			}
 		}
-		p.SetState(27)
+		p.SetState(31)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -599,7 +635,7 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 
 		for _la == SimpleCalcParserCOMMA {
 			{
-				p.SetState(23)
+				p.SetState(27)
 				p.Match(SimpleCalcParserCOMMA)
 				if p.HasError() {
 					// Recognition error - abort rule
@@ -607,7 +643,7 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 				}
 			}
 			{
-				p.SetState(24)
+				p.SetState(28)
 				p.Match(SimpleCalcParserIDENT)
 				if p.HasError() {
 					// Recognition error - abort rule
@@ -615,7 +651,7 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 				}
 			}
 
-			p.SetState(29)
+			p.SetState(33)
 			p.GetErrorHandler().Sync(p)
 			if p.HasError() {
 				goto errorExit
@@ -625,7 +661,7 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 
 	}
 	{
-		p.SetState(32)
+		p.SetState(36)
 		p.Match(SimpleCalcParserRPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -633,14 +669,14 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 		}
 	}
 	{
-		p.SetState(33)
+		p.SetState(37)
 		p.Match(SimpleCalcParserLBRACE)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
 		}
 	}
-	p.SetState(37)
+	p.SetState(41)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -649,11 +685,11 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 
 	for _la == SimpleCalcParserLET {
 		{
-			p.SetState(34)
+			p.SetState(38)
 			p.LetStatement()
 		}
 
-		p.SetState(39)
+		p.SetState(43)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -661,7 +697,11 @@ func (p *SimpleCalcParser) FuncStatement() (localctx IFuncStatementContext) {
 		_la = p.GetTokenStream().LA(1)
 	}
 	{
-		p.SetState(40)
+		p.SetState(44)
+		p.ReturnStatement()
+	}
+	{
+		p.SetState(45)
 		p.Match(SimpleCalcParserRBRACE)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -694,6 +734,7 @@ type ILetStatementContext interface {
 	IDENT() antlr.TerminalNode
 	ASSIGN() antlr.TerminalNode
 	SEMICOLON() antlr.TerminalNode
+	AnonFunction() IAnonFunctionContext
 	CallFunc() ICallFuncContext
 	Expression() IExpressionContext
 
@@ -747,6 +788,22 @@ func (s *LetStatementContext) ASSIGN() antlr.TerminalNode {
 
 func (s *LetStatementContext) SEMICOLON() antlr.TerminalNode {
 	return s.GetToken(SimpleCalcParserSEMICOLON, 0)
+}
+
+func (s *LetStatementContext) AnonFunction() IAnonFunctionContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IAnonFunctionContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IAnonFunctionContext)
 }
 
 func (s *LetStatementContext) CallFunc() ICallFuncContext {
@@ -806,7 +863,7 @@ func (p *SimpleCalcParser) LetStatement() (localctx ILetStatementContext) {
 	p.EnterRule(localctx, 4, SimpleCalcParserRULE_letStatement)
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(42)
+		p.SetState(47)
 		p.Match(SimpleCalcParserLET)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -814,7 +871,7 @@ func (p *SimpleCalcParser) LetStatement() (localctx ILetStatementContext) {
 		}
 	}
 	{
-		p.SetState(43)
+		p.SetState(48)
 		p.Match(SimpleCalcParserIDENT)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -822,14 +879,14 @@ func (p *SimpleCalcParser) LetStatement() (localctx ILetStatementContext) {
 		}
 	}
 	{
-		p.SetState(44)
+		p.SetState(49)
 		p.Match(SimpleCalcParserASSIGN)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
 		}
 	}
-	p.SetState(47)
+	p.SetState(53)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -838,13 +895,19 @@ func (p *SimpleCalcParser) LetStatement() (localctx ILetStatementContext) {
 	switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 5, p.GetParserRuleContext()) {
 	case 1:
 		{
-			p.SetState(45)
-			p.CallFunc()
+			p.SetState(50)
+			p.AnonFunction()
 		}
 
 	case 2:
 		{
-			p.SetState(46)
+			p.SetState(51)
+			p.CallFunc()
+		}
+
+	case 3:
+		{
+			p.SetState(52)
 			p.expression(0)
 		}
 
@@ -852,7 +915,7 @@ func (p *SimpleCalcParser) LetStatement() (localctx ILetStatementContext) {
 		goto errorExit
 	}
 	{
-		p.SetState(49)
+		p.SetState(55)
 		p.Match(SimpleCalcParserSEMICOLON)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -975,7 +1038,7 @@ func (p *SimpleCalcParser) CallFunc() (localctx ICallFuncContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(51)
+		p.SetState(57)
 		p.Match(SimpleCalcParserIDENT)
 		if p.HasError() {
 			// Recognition error - abort rule
@@ -983,14 +1046,14 @@ func (p *SimpleCalcParser) CallFunc() (localctx ICallFuncContext) {
 		}
 	}
 	{
-		p.SetState(52)
+		p.SetState(58)
 		p.Match(SimpleCalcParserLPAREN)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
 		}
 	}
-	p.SetState(61)
+	p.SetState(67)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
@@ -999,14 +1062,14 @@ func (p *SimpleCalcParser) CallFunc() (localctx ICallFuncContext) {
 
 	if _la == SimpleCalcParserIDENT {
 		{
-			p.SetState(53)
+			p.SetState(59)
 			p.Match(SimpleCalcParserIDENT)
 			if p.HasError() {
 				// Recognition error - abort rule
 				goto errorExit
 			}
 		}
-		p.SetState(58)
+		p.SetState(64)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
@@ -1015,7 +1078,7 @@ func (p *SimpleCalcParser) CallFunc() (localctx ICallFuncContext) {
 
 		for _la == SimpleCalcParserCOMMA {
 			{
-				p.SetState(54)
+				p.SetState(60)
 				p.Match(SimpleCalcParserCOMMA)
 				if p.HasError() {
 					// Recognition error - abort rule
@@ -1023,7 +1086,7 @@ func (p *SimpleCalcParser) CallFunc() (localctx ICallFuncContext) {
 				}
 			}
 			{
-				p.SetState(55)
+				p.SetState(61)
 				p.Match(SimpleCalcParserIDENT)
 				if p.HasError() {
 					// Recognition error - abort rule
@@ -1031,7 +1094,7 @@ func (p *SimpleCalcParser) CallFunc() (localctx ICallFuncContext) {
 				}
 			}
 
-			p.SetState(60)
+			p.SetState(66)
 			p.GetErrorHandler().Sync(p)
 			if p.HasError() {
 				goto errorExit
@@ -1041,8 +1104,312 @@ func (p *SimpleCalcParser) CallFunc() (localctx ICallFuncContext) {
 
 	}
 	{
-		p.SetState(63)
+		p.SetState(69)
 		p.Match(SimpleCalcParserRPAREN)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
+	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
+}
+
+// IAnonFunctionContext is an interface to support dynamic dispatch.
+type IAnonFunctionContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// Getter signatures
+	FUNCTION() antlr.TerminalNode
+	LPAREN() antlr.TerminalNode
+	RPAREN() antlr.TerminalNode
+	LBRACE() antlr.TerminalNode
+	ReturnStatement() IReturnStatementContext
+	RBRACE() antlr.TerminalNode
+	AllIDENT() []antlr.TerminalNode
+	IDENT(i int) antlr.TerminalNode
+	AllLetStatement() []ILetStatementContext
+	LetStatement(i int) ILetStatementContext
+	AllCOMMA() []antlr.TerminalNode
+	COMMA(i int) antlr.TerminalNode
+
+	// IsAnonFunctionContext differentiates from other interfaces.
+	IsAnonFunctionContext()
+}
+
+type AnonFunctionContext struct {
+	antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyAnonFunctionContext() *AnonFunctionContext {
+	var p = new(AnonFunctionContext)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = SimpleCalcParserRULE_anonFunction
+	return p
+}
+
+func InitEmptyAnonFunctionContext(p *AnonFunctionContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = SimpleCalcParserRULE_anonFunction
+}
+
+func (*AnonFunctionContext) IsAnonFunctionContext() {}
+
+func NewAnonFunctionContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *AnonFunctionContext {
+	var p = new(AnonFunctionContext)
+
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SimpleCalcParserRULE_anonFunction
+
+	return p
+}
+
+func (s *AnonFunctionContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *AnonFunctionContext) FUNCTION() antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserFUNCTION, 0)
+}
+
+func (s *AnonFunctionContext) LPAREN() antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserLPAREN, 0)
+}
+
+func (s *AnonFunctionContext) RPAREN() antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserRPAREN, 0)
+}
+
+func (s *AnonFunctionContext) LBRACE() antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserLBRACE, 0)
+}
+
+func (s *AnonFunctionContext) ReturnStatement() IReturnStatementContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IReturnStatementContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IReturnStatementContext)
+}
+
+func (s *AnonFunctionContext) RBRACE() antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserRBRACE, 0)
+}
+
+func (s *AnonFunctionContext) AllIDENT() []antlr.TerminalNode {
+	return s.GetTokens(SimpleCalcParserIDENT)
+}
+
+func (s *AnonFunctionContext) IDENT(i int) antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserIDENT, i)
+}
+
+func (s *AnonFunctionContext) AllLetStatement() []ILetStatementContext {
+	children := s.GetChildren()
+	len := 0
+	for _, ctx := range children {
+		if _, ok := ctx.(ILetStatementContext); ok {
+			len++
+		}
+	}
+
+	tst := make([]ILetStatementContext, len)
+	i := 0
+	for _, ctx := range children {
+		if t, ok := ctx.(ILetStatementContext); ok {
+			tst[i] = t.(ILetStatementContext)
+			i++
+		}
+	}
+
+	return tst
+}
+
+func (s *AnonFunctionContext) LetStatement(i int) ILetStatementContext {
+	var t antlr.RuleContext
+	j := 0
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(ILetStatementContext); ok {
+			if j == i {
+				t = ctx.(antlr.RuleContext)
+				break
+			}
+			j++
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(ILetStatementContext)
+}
+
+func (s *AnonFunctionContext) AllCOMMA() []antlr.TerminalNode {
+	return s.GetTokens(SimpleCalcParserCOMMA)
+}
+
+func (s *AnonFunctionContext) COMMA(i int) antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserCOMMA, i)
+}
+
+func (s *AnonFunctionContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *AnonFunctionContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *AnonFunctionContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleCalcListener); ok {
+		listenerT.EnterAnonFunction(s)
+	}
+}
+
+func (s *AnonFunctionContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleCalcListener); ok {
+		listenerT.ExitAnonFunction(s)
+	}
+}
+
+func (p *SimpleCalcParser) AnonFunction() (localctx IAnonFunctionContext) {
+	localctx = NewAnonFunctionContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 8, SimpleCalcParserRULE_anonFunction)
+	var _la int
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(71)
+		p.Match(SimpleCalcParserFUNCTION)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(72)
+		p.Match(SimpleCalcParserLPAREN)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	p.SetState(81)
+	p.GetErrorHandler().Sync(p)
+	if p.HasError() {
+		goto errorExit
+	}
+	_la = p.GetTokenStream().LA(1)
+
+	if _la == SimpleCalcParserIDENT {
+		{
+			p.SetState(73)
+			p.Match(SimpleCalcParserIDENT)
+			if p.HasError() {
+				// Recognition error - abort rule
+				goto errorExit
+			}
+		}
+		p.SetState(78)
+		p.GetErrorHandler().Sync(p)
+		if p.HasError() {
+			goto errorExit
+		}
+		_la = p.GetTokenStream().LA(1)
+
+		for _la == SimpleCalcParserCOMMA {
+			{
+				p.SetState(74)
+				p.Match(SimpleCalcParserCOMMA)
+				if p.HasError() {
+					// Recognition error - abort rule
+					goto errorExit
+				}
+			}
+			{
+				p.SetState(75)
+				p.Match(SimpleCalcParserIDENT)
+				if p.HasError() {
+					// Recognition error - abort rule
+					goto errorExit
+				}
+			}
+
+			p.SetState(80)
+			p.GetErrorHandler().Sync(p)
+			if p.HasError() {
+				goto errorExit
+			}
+			_la = p.GetTokenStream().LA(1)
+		}
+
+	}
+	{
+		p.SetState(83)
+		p.Match(SimpleCalcParserRPAREN)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	{
+		p.SetState(84)
+		p.Match(SimpleCalcParserLBRACE)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	p.SetState(88)
+	p.GetErrorHandler().Sync(p)
+	if p.HasError() {
+		goto errorExit
+	}
+	_la = p.GetTokenStream().LA(1)
+
+	for _la == SimpleCalcParserLET {
+		{
+			p.SetState(85)
+			p.LetStatement()
+		}
+
+		p.SetState(90)
+		p.GetErrorHandler().Sync(p)
+		if p.HasError() {
+			goto errorExit
+		}
+		_la = p.GetTokenStream().LA(1)
+	}
+	{
+		p.SetState(91)
+		p.ReturnStatement()
+	}
+	{
+		p.SetState(92)
+		p.Match(SimpleCalcParserRBRACE)
 		if p.HasError() {
 			// Recognition error - abort rule
 			goto errorExit
@@ -1226,23 +1593,23 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 	localctx = NewExpressionContext(p, p.GetParserRuleContext(), _parentState)
 	var _prevctx IExpressionContext = localctx
 	var _ antlr.ParserRuleContext = _prevctx // TODO: To prevent unused variable warning.
-	_startState := 8
-	p.EnterRecursionRule(localctx, 8, SimpleCalcParserRULE_expression, _p)
+	_startState := 10
+	p.EnterRecursionRule(localctx, 10, SimpleCalcParserRULE_expression, _p)
 	var _alt int
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(73)
+	p.SetState(102)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
 
-	switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 8, p.GetParserRuleContext()) {
+	switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 11, p.GetParserRuleContext()) {
 	case 1:
 
 	case 2:
 		{
-			p.SetState(66)
+			p.SetState(95)
 			p.Match(SimpleCalcParserINT)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -1252,7 +1619,7 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 
 	case 3:
 		{
-			p.SetState(67)
+			p.SetState(96)
 			p.Match(SimpleCalcParserFLOAT)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -1262,7 +1629,7 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 
 	case 4:
 		{
-			p.SetState(68)
+			p.SetState(97)
 			p.Match(SimpleCalcParserIDENT)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -1272,7 +1639,7 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 
 	case 5:
 		{
-			p.SetState(69)
+			p.SetState(98)
 			p.Match(SimpleCalcParserLPAREN)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -1280,11 +1647,11 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 			}
 		}
 		{
-			p.SetState(70)
+			p.SetState(99)
 			p.expression(0)
 		}
 		{
-			p.SetState(71)
+			p.SetState(100)
 			p.Match(SimpleCalcParserRPAREN)
 			if p.HasError() {
 				// Recognition error - abort rule
@@ -1296,12 +1663,12 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 		goto errorExit
 	}
 	p.GetParserRuleContext().SetStop(p.GetTokenStream().LT(-1))
-	p.SetState(89)
+	p.SetState(118)
 	p.GetErrorHandler().Sync(p)
 	if p.HasError() {
 		goto errorExit
 	}
-	_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 10, p.GetParserRuleContext())
+	_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 13, p.GetParserRuleContext())
 	if p.HasError() {
 		goto errorExit
 	}
@@ -1311,24 +1678,24 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 				p.TriggerExitRuleEvent()
 			}
 			_prevctx = localctx
-			p.SetState(87)
+			p.SetState(116)
 			p.GetErrorHandler().Sync(p)
 			if p.HasError() {
 				goto errorExit
 			}
 
-			switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 9, p.GetParserRuleContext()) {
+			switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 12, p.GetParserRuleContext()) {
 			case 1:
 				localctx = NewExpressionContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, SimpleCalcParserRULE_expression)
-				p.SetState(75)
+				p.SetState(104)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 8)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 8)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(76)
+					p.SetState(105)
 					p.Match(SimpleCalcParserPLUS)
 					if p.HasError() {
 						// Recognition error - abort rule
@@ -1336,21 +1703,21 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 					}
 				}
 				{
-					p.SetState(77)
+					p.SetState(106)
 					p.expression(9)
 				}
 
 			case 2:
 				localctx = NewExpressionContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, SimpleCalcParserRULE_expression)
-				p.SetState(78)
+				p.SetState(107)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 7)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 7)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(79)
+					p.SetState(108)
 					p.Match(SimpleCalcParserMINUS)
 					if p.HasError() {
 						// Recognition error - abort rule
@@ -1358,21 +1725,21 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 					}
 				}
 				{
-					p.SetState(80)
+					p.SetState(109)
 					p.expression(8)
 				}
 
 			case 3:
 				localctx = NewExpressionContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, SimpleCalcParserRULE_expression)
-				p.SetState(81)
+				p.SetState(110)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 6)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 6)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(82)
+					p.SetState(111)
 					p.Match(SimpleCalcParserMULTIPLY)
 					if p.HasError() {
 						// Recognition error - abort rule
@@ -1380,21 +1747,21 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 					}
 				}
 				{
-					p.SetState(83)
+					p.SetState(112)
 					p.expression(7)
 				}
 
 			case 4:
 				localctx = NewExpressionContext(p, _parentctx, _parentState)
 				p.PushNewRecursionContext(localctx, _startState, SimpleCalcParserRULE_expression)
-				p.SetState(84)
+				p.SetState(113)
 
 				if !(p.Precpred(p.GetParserRuleContext(), 5)) {
 					p.SetError(antlr.NewFailedPredicateException(p, "p.Precpred(p.GetParserRuleContext(), 5)", ""))
 					goto errorExit
 				}
 				{
-					p.SetState(85)
+					p.SetState(114)
 					p.Match(SimpleCalcParserDIVIDE)
 					if p.HasError() {
 						// Recognition error - abort rule
@@ -1402,7 +1769,7 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 					}
 				}
 				{
-					p.SetState(86)
+					p.SetState(115)
 					p.expression(6)
 				}
 
@@ -1411,12 +1778,12 @@ func (p *SimpleCalcParser) expression(_p int) (localctx IExpressionContext) {
 			}
 
 		}
-		p.SetState(91)
+		p.SetState(120)
 		p.GetErrorHandler().Sync(p)
 		if p.HasError() {
 			goto errorExit
 		}
-		_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 10, p.GetParserRuleContext())
+		_alt = p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 13, p.GetParserRuleContext())
 		if p.HasError() {
 			goto errorExit
 		}
@@ -1435,9 +1802,174 @@ errorExit:
 	goto errorExit // Trick to prevent compiler error if the label is not used
 }
 
+// IReturnStatementContext is an interface to support dynamic dispatch.
+type IReturnStatementContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// Getter signatures
+	RETURN() antlr.TerminalNode
+	SEMICOLON() antlr.TerminalNode
+	Expression() IExpressionContext
+	AnonFunction() IAnonFunctionContext
+
+	// IsReturnStatementContext differentiates from other interfaces.
+	IsReturnStatementContext()
+}
+
+type ReturnStatementContext struct {
+	antlr.BaseParserRuleContext
+	parser antlr.Parser
+}
+
+func NewEmptyReturnStatementContext() *ReturnStatementContext {
+	var p = new(ReturnStatementContext)
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = SimpleCalcParserRULE_returnStatement
+	return p
+}
+
+func InitEmptyReturnStatementContext(p *ReturnStatementContext) {
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, nil, -1)
+	p.RuleIndex = SimpleCalcParserRULE_returnStatement
+}
+
+func (*ReturnStatementContext) IsReturnStatementContext() {}
+
+func NewReturnStatementContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *ReturnStatementContext {
+	var p = new(ReturnStatementContext)
+
+	antlr.InitBaseParserRuleContext(&p.BaseParserRuleContext, parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = SimpleCalcParserRULE_returnStatement
+
+	return p
+}
+
+func (s *ReturnStatementContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *ReturnStatementContext) RETURN() antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserRETURN, 0)
+}
+
+func (s *ReturnStatementContext) SEMICOLON() antlr.TerminalNode {
+	return s.GetToken(SimpleCalcParserSEMICOLON, 0)
+}
+
+func (s *ReturnStatementContext) Expression() IExpressionContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IExpressionContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IExpressionContext)
+}
+
+func (s *ReturnStatementContext) AnonFunction() IAnonFunctionContext {
+	var t antlr.RuleContext
+	for _, ctx := range s.GetChildren() {
+		if _, ok := ctx.(IAnonFunctionContext); ok {
+			t = ctx.(antlr.RuleContext)
+			break
+		}
+	}
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IAnonFunctionContext)
+}
+
+func (s *ReturnStatementContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *ReturnStatementContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *ReturnStatementContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleCalcListener); ok {
+		listenerT.EnterReturnStatement(s)
+	}
+}
+
+func (s *ReturnStatementContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(SimpleCalcListener); ok {
+		listenerT.ExitReturnStatement(s)
+	}
+}
+
+func (p *SimpleCalcParser) ReturnStatement() (localctx IReturnStatementContext) {
+	localctx = NewReturnStatementContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 12, SimpleCalcParserRULE_returnStatement)
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(121)
+		p.Match(SimpleCalcParserRETURN)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+	p.SetState(124)
+	p.GetErrorHandler().Sync(p)
+	if p.HasError() {
+		goto errorExit
+	}
+
+	switch p.GetInterpreter().AdaptivePredict(p.BaseParser, p.GetTokenStream(), 14, p.GetParserRuleContext()) {
+	case 1:
+		{
+			p.SetState(122)
+			p.expression(0)
+		}
+
+	case 2:
+		{
+			p.SetState(123)
+			p.AnonFunction()
+		}
+
+	case antlr.ATNInvalidAltNumber:
+		goto errorExit
+	}
+	{
+		p.SetState(126)
+		p.Match(SimpleCalcParserSEMICOLON)
+		if p.HasError() {
+			// Recognition error - abort rule
+			goto errorExit
+		}
+	}
+
+errorExit:
+	if p.HasError() {
+		v := p.GetError()
+		localctx.SetException(v)
+		p.GetErrorHandler().ReportError(p, v)
+		p.GetErrorHandler().Recover(p, v)
+		p.SetError(nil)
+	}
+	p.ExitRule()
+	return localctx
+	goto errorExit // Trick to prevent compiler error if the label is not used
+}
+
 func (p *SimpleCalcParser) Sempred(localctx antlr.RuleContext, ruleIndex, predIndex int) bool {
 	switch ruleIndex {
-	case 4:
+	case 5:
 		var t *ExpressionContext = nil
 		if localctx != nil {
 			t = localctx.(*ExpressionContext)
