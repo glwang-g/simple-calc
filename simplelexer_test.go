@@ -7,7 +7,7 @@ import (
 	"github.com/antlr4-go/antlr/v4"
 )
 
-func TestNewSimpleCalc(t *testing.T) {
+func TestSimpleCalcLexer(t *testing.T) {
 	inputstr := `
 		let five = 5;
 		let add = fn(x, y) {
@@ -41,25 +41,27 @@ func TestNewSimpleCalc(t *testing.T) {
 		}
 		// 打印 token 的类型和文本
 		log.SetFlags(0)
-		log.Printf("Token: {%s, %q}", lexer.SymbolicNames[token.GetTokenType()], token.GetText())
+		log.Printf("Token: {%d, %s, %q}", token.GetTokenType(), lexer.SymbolicNames[token.GetTokenType()], token.GetText())
 	}
 }
 
-func TestNewSimpleCalcParser(t *testing.T) {
+func TestSimpleCalcParser(t *testing.T) {
 	inputstr := `
 		let b = 3;
 		fn add(x, y, z) {
 			let xyz = 321;
+			return xyz;
 		}
 		let a = 10;
 		let ten = 10 + five;
 
+		let add2 = fn(x, y) {
+		  let xyz = x + y;
+		  return 123+123;
+		};
 
 		let result = add(five, ten);
 	`
-	// inputstr := `
-	// 	let result = add(five, ten);
-	// `
 	input := antlr.NewInputStream(inputstr)
 	lexer := NewSimpleCalcLexer(input)
 	parser := NewSimpleCalcParser(antlr.NewCommonTokenStream(lexer, 0))
@@ -79,5 +81,4 @@ func TestNewSimpleCalcParser(t *testing.T) {
 	}
 
 	log.Printf("post Parsing...")
-	// antlr.ParseTreeWalkerDefault.Walk(listener, prog)
 }
