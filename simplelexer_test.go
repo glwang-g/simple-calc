@@ -55,7 +55,7 @@ func TestSimpleCalcParser(t *testing.T) {
 		let a = 10;
 		let ten = 10 + five;
 
-		let add2 = fn (x, y) {
+		let add2 = fn abc(x, y) {
 		  let xyz = x + y;
 		  return 123+123;
 		};
