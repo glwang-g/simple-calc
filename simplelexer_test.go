@@ -55,7 +55,7 @@ func TestSimpleCalcParser(t *testing.T) {
 		let a = 10;
 		let ten = 10 + five;
 
-		let add2 = fn(x, y) {
+		let add2 = fn (x, y) {
 		  let xyz = x + y;
 		  return 123+123;
 		};
@@ -64,11 +64,21 @@ func TestSimpleCalcParser(t *testing.T) {
 	`
 	input := antlr.NewInputStream(inputstr)
 	lexer := NewSimpleCalcLexer(input)
+
+	// 创建并添加错误监听器
+	errorListener := NewSimpleCalcErrorListener()
+	lexer.RemoveErrorListeners()
+	lexer.AddErrorListener(errorListener)
+
+
 	parser := NewSimpleCalcParser(antlr.NewCommonTokenStream(lexer, 0))
 	if parser == nil {
 		t.Fatal("Failed to create parser")
 		return
 	}
+
+	parser.RemoveErrorListeners()
+	parser.AddErrorListener(errorListener)
 
 	listener := &BaseSimpleCalcListener{}
 	parser.AddParseListener(listener)
@@ -79,6 +89,8 @@ func TestSimpleCalcParser(t *testing.T) {
 	if prog == nil {
 		t.Fatal("Failed to parse program")
 	}
+
+	errorListener.PrintErrors()
 
 	log.Printf("post Parsing...")
 }
